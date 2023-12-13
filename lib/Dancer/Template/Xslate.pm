@@ -49,10 +49,16 @@ sub render {
     my $app    = Dancer::App->current;
     $template = abs2rel( rel2abs($template), $app->setting("views") );
     my $xslate = $self->{driver};
+    my @template_warnings;
+    local $SIG{__WARN__} = sub { push @template_warnings, shift; };
     my $content = $xslate->render($template, $tokens);
-
+    if (@template_warnings) {
+        my $plural = !!(@template_warnings > 1);
+        Carp::carp 'Warning' . ('s' x $plural) . qq( caught while rendering template "$template": )
+                 . $template_warnings[0] . ($plural ? qq{\n(and $#template_warnings other)} . ('s' x $plural) : '');
+    }
     if (my $err = $@) {
-        croak qq(Couldn't render template "$err");
+        croak qq(Couldn't render template "$template": $err);
     }
 
     return $content;
