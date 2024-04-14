@@ -13,5 +13,5 @@ Revision history for Dancer-Template-Xslate
     - Fixed MS Windows pathing bug.
     - Stopped using Dancer::Config directly.
 
-0.01      Mon 2010-08-02 12:23:50 CEST
+0.01      2010-08-02 12:23:50 CEST
     - initial release
