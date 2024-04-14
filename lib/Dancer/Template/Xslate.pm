@@ -114,3 +114,7 @@ C<layout> can be disabled in favor of C<cascade>.
 =item L<Text::Xslate>
 
 =back
+
+=head1 MAINTAINER
+
+Dancer Core Team
